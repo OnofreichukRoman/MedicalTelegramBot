@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Telegram.Bot.Types;
+using MedicalTelegrammBot.Models;
 
 namespace MedicalTelegrammBot
 {
@@ -42,6 +44,9 @@ namespace MedicalTelegrammBot
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            //Bot Configurations
+            Bot.GetBotClientAsync().Wait();
         }
     }
 }
