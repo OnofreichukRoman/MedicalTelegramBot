@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Telegram.Bot.Types;
 using MedicalTelegrammBot.Models;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace MedicalTelegrammBot
 {
@@ -28,6 +29,11 @@ namespace MedicalTelegrammBot
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.Configure<ForwardedHeadersOptions>(options =>
+        {
+            options.ForwardedHeaders =
+                ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+        });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,9 +42,11 @@ namespace MedicalTelegrammBot
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseForwardedHeaders();
             }
             else
             {
+                app.UseForwardedHeaders();
                 app.UseHsts();
             }
 
