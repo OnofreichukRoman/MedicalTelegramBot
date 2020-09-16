@@ -338,3 +338,11 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/MedicalTelegrammBot
+/MedicalTelegrammBot.deps.json
+/MedicalTelegrammBot.dll
+/MedicalTelegrammBot.exe
+/MedicalTelegrammBot.runtimeconfig.json
+/Telegram.Bot.dll
+/web.config
+/.config/dotnet-tools.json
