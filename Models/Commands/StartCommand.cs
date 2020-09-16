@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -24,7 +21,7 @@ namespace MedicalTelegrammBot.Models.Commands
         public override async Task Execute(Message message, TelegramBotClient botClient)
         {
             var chatId = message.Chat.Id;
-            await botClient.SendTextMessageAsync(chatId, "Привет, если ты это видишь значит Рома таки все сделал.",parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
+            await botClient.SendTextMessageAsync(chatId, "Привет, если ты это видишь значит Рома таки все сделал.", parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
         }
     }
 }

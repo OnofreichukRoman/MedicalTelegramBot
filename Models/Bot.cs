@@ -1,34 +1,32 @@
-﻿using System;
+﻿using MedicalTelegrammBot.Models.Commands;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot;
-using MedicalTelegrammBot.Models.Commands;
 
 namespace MedicalTelegrammBot.Models
 {
     public class Bot
     {
-        private static TelegramBotClient botClient;
-        private static List<Command> comandsList;
+        private static TelegramBotClient _botClient;
+        private static List<Command> _comandsList;
 
-        public static IReadOnlyList<Command> Commands => comandsList.AsReadOnly();
+        public static IReadOnlyList<Command> Commands => _comandsList.AsReadOnly();
 
         public static async Task<TelegramBotClient> GetBotClientAsync()
         {
-            if (botClient != null)
+            if (_botClient != null)
             {
-                return botClient;
+                return _botClient;
             }
 
-            comandsList = new List<Command>();
-            comandsList.Add(new StartCommand());
+            _comandsList = new List<Command>();
+            _comandsList.Add(new StartCommand());
             //TODO: Add more commands
 
-            botClient = new TelegramBotClient(AppSettings.Token);
+            _botClient = new TelegramBotClient(AppSettings.Token);
             string hook = string.Format(AppSettings.Url, "api/message/update");
-            await botClient.SetWebhookAsync(hook);
-            return botClient;
+            await _botClient.SetWebhookAsync(hook);
+            return _botClient;
         }
     }
 }

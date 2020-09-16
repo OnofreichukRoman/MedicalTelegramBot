@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MedicalTelegrammBot.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using Telegram.Bot.Types;
-using MedicalTelegrammBot.Models;
 
 namespace MedicalTelegrammBot.Controllers
 {
@@ -20,7 +17,7 @@ namespace MedicalTelegrammBot.Controllers
 
         // POST api/values
         [HttpPost]
-        public async Task<OkResult> Post([FromBody]Update update)
+        public async Task<OkResult> Post([FromBody] Update update)
         {
             if (update == null)
             {
