@@ -15,13 +15,13 @@ namespace MedicalTelegrammBot.Models.Commands
                 return false;
             }
 
-            return message.Text.Contains(this.Name) && message.Text.Contains(AppSettings.Name);
+            return message.Text.Contains(this.Name);
         }
 
         public override async Task Execute(Message message, TelegramBotClient botClient)
         {
             var chatId = message.Chat.Id;
-            string botTextAnswer = $"![This is picture](https://thepresentation.ru/img/thumbs/dc3e75780cc1225ce8dd917e1f047e49-800x.jpg)*Привет*, если ты это видишь значит **Рома** таки все сделал. Твой chatId: {chatId}";
+            string botTextAnswer = $"[This is picture](https://thepresentation.ru/img/thumbs/dc3e75780cc1225ce8dd917e1f047e49-800x.jpg) *Привет*, если ты это видишь значит Рома таки все сделал. Твой chatId: {chatId}. Можешь использовать новую команду /keyboardTest ";
 
             await botClient.SendTextMessageAsync(chatId, botTextAnswer, parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
         }

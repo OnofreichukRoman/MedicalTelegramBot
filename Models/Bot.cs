@@ -21,6 +21,7 @@ namespace MedicalTelegrammBot.Models
 
             _comandsList = new List<Command>();
             _comandsList.Add(new StartCommand());
+            _comandsList.Add(new KeyboardTestCommand());
             //TODO: Add more commands
 
             _botClient = new TelegramBotClient(AppSettings.Token);
