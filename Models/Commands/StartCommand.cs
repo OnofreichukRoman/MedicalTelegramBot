@@ -6,7 +6,7 @@ namespace MedicalTelegrammBot.Models.Commands
 {
     public class StartCommand : Command
     {
-        public override string Name => "/start";
+        public override string Name => @"/start";
 
         public override bool Contains(Message message)
         {
@@ -15,13 +15,15 @@ namespace MedicalTelegrammBot.Models.Commands
                 return false;
             }
 
-            return message.Text.Contains(this.Name);
+            return message.Text.Contains(this.Name) && message.Text.Contains(AppSettings.Name);
         }
 
         public override async Task Execute(Message message, TelegramBotClient botClient)
         {
             var chatId = message.Chat.Id;
-            await botClient.SendTextMessageAsync(chatId, "Привет, если ты это видишь значит Рома таки все сделал.", parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
+            string botTextAnswer = $"![This is picture](https://thepresentation.ru/img/thumbs/dc3e75780cc1225ce8dd917e1f047e49-800x.jpg)*Привет*, если ты это видишь значит **Рома** таки все сделал. Твой chatId: {chatId}";
+
+            await botClient.SendTextMessageAsync(chatId, botTextAnswer, parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
         }
     }
 }
