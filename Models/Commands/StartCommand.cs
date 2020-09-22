@@ -26,11 +26,11 @@ namespace MedicalTelegrammBot.Models.Commands
                 {
                      new[] // row 1
                      {
-                          new Telegram.Bot.Types.ReplyMarkups.KeyboardButton("Анализы"),
+                          new Telegram.Bot.Types.ReplyMarkups.KeyboardButton("🔬 Анализы"),
                      },
                      new[]
                      {
-                          new Telegram.Bot.Types.ReplyMarkups.KeyboardButton("Первая помощь")
+                          new Telegram.Bot.Types.ReplyMarkups.KeyboardButton("🚑 Первая помощь")
                      }
                 },
                 ResizeKeyboard = true
@@ -38,10 +38,10 @@ namespace MedicalTelegrammBot.Models.Commands
 
             var chatId = message.Chat.Id;
             var userName = message.From.Username;
-            string botTextAnswer = $"Здравствуйте, *{userName}*!";
+            string botTextAnswer = $"Здравствуйте, *{userName}*! 🏥";
             string botKeyboardMessage = "Сделайте свой выбор:";
 
-            await botClient.SendPhotoAsync(chatId, "https://intalent.pro/sites/default/files/styles/new_photo_in_article/public/foto/article/ai-and-meds.jpg?itok=3ryePX_S", botTextAnswer, parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
+            await botClient.SendPhotoAsync(chatId, "https://github.com/OnofreichukRoman/MedicalTelegrammBot/blob/master/Images/start.jpg?raw=true", botTextAnswer, parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
             await botClient.SendTextMessageAsync(message.Chat.Id, botKeyboardMessage, replyMarkup: keyboard);
         }
     }
