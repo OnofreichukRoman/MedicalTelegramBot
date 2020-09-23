@@ -19,24 +19,33 @@ namespace MedicalTelegrammBot.Controllers
         [HttpPost]
         public async Task<OkResult> Post([FromBody] Update update)
         {
-            if (update == null)
+            if (update == null || update.Message == null || update.InlineQuery == null)
             {
+                System.Console.WriteLine("UpdateNullPointerExeption");
                 return Ok();
             }
 
-            var commands = Bot.Commands;
-            var message = update.Message;
-            var botClient = await Bot.GetBotClientAsync();
-
-            foreach (var command in commands)
+            try
             {
-                if (command.Contains(message))
+                var commands = Bot.Commands;
+                var message = update.Message;
+                var botClient = await Bot.GetBotClientAsync();
+
+                foreach (var command in commands)
                 {
-                    await command.Execute(message, botClient);
-                    break;
+                    if (command.Contains(message))
+                    {
+                        await command.Execute(message, botClient);
+                        break;
+                    }
                 }
+                return Ok();
             }
-            return Ok();
+            catch(System.Exception ex)
+            {
+                System.Console.WriteLine(ex.Message);
+                return Ok();
+            }
         }
     }
 }

@@ -4,12 +4,12 @@ using Telegram.Bot.Types;
 
 namespace MedicalTelegrammBot.Models.Commands
 {
-    public abstract class Command
+    internal abstract class Command
     {
-        public abstract string Name { get; }
+        internal abstract string Name { get; }
 
-        public abstract Task Execute(Message message, TelegramBotClient client);
+        internal abstract Task Execute(Message message, TelegramBotClient client);
 
-        public abstract bool Contains(Message message);
+        internal abstract bool Contains(Message message);
     }
 }

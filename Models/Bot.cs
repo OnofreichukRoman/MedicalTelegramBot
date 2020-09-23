@@ -5,14 +5,14 @@ using Telegram.Bot;
 
 namespace MedicalTelegrammBot.Models
 {
-    public class Bot
+    internal static class Bot
     {
         private static TelegramBotClient _botClient;
         private static List<Command> _comandsList;
 
-        public static IReadOnlyList<Command> Commands => _comandsList.AsReadOnly();
+        internal static IReadOnlyList<Command> Commands => _comandsList.AsReadOnly();
 
-        public static async Task<TelegramBotClient> GetBotClientAsync()
+        internal static async Task<TelegramBotClient> GetBotClientAsync()
         {
             if (_botClient != null)
             {
@@ -21,7 +21,7 @@ namespace MedicalTelegrammBot.Models
 
             _comandsList = new List<Command>();
             _comandsList.Add(new StartCommand());
-            _comandsList.Add(new KeyboardTestCommand());
+            _comandsList.Add(new AnalyzesCommand());
             //TODO: Add more commands
 
             _botClient = new TelegramBotClient(AppSettings.Token);

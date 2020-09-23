@@ -1,9 +1,9 @@
 ﻿namespace MedicalTelegrammBot.Models
 {
-    public static class AppSettings
+    internal static class AppSettings
     {
-        public static string Url { get; set; } = "https://URL:443/{0}";
-        public static string Name { get; set; } = "<BOT_NAME>";
-        public static string Token { get; set; } = "<BOT_TOKEN>";
+        internal static string Url { get; set; } = "https://junnote.com.ua/bot/{0}";
+        internal static string Name { get; set; } = "<BOT_NAME>";
+        internal static string Token { get; set; } = "1269630215:AAHMuWg2MPouj4T5DKq7iBEoT6hIMP0LWo4";
     }
 }
