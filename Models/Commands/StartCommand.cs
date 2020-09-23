@@ -8,16 +8,6 @@ namespace MedicalTelegrammBot.Models.Commands
     {
         internal override string Name => @"/start";
 
-        internal override bool Contains(Message message)
-        {
-            if (message.Type != Telegram.Bot.Types.Enums.MessageType.Text)
-            {
-                return false;
-            }
-
-            return message.Text.Contains(this.Name);
-        }
-
         internal override async Task Execute(Message message, TelegramBotClient botClient)
         {
             var keyboardButtons = new []

@@ -19,13 +19,13 @@ namespace MedicalTelegrammBot.Controllers
         [HttpPost]
         public async Task<OkResult> Post([FromBody] Update update)
         {
-            if (update == null || update.Message == null || update.InlineQuery == null)
+            if (update == null)
             {
                 System.Console.WriteLine("UpdateNullPointerExeption");
                 return Ok();
             }
 
-            try
+            if (update.Message != null && update.Message.Text != null)
             {
                 var commands = Bot.Commands;
                 var message = update.Message;
@@ -33,19 +33,24 @@ namespace MedicalTelegrammBot.Controllers
 
                 foreach (var command in commands)
                 {
-                    if (command.Contains(message))
+                    if (message.Text.Contains(command.Name))
                     {
                         await command.Execute(message, botClient);
                         break;
                     }
                 }
-                return Ok();
             }
-            catch(System.Exception ex)
+            else if (update.Message != null && update.Message.Text == null)
             {
-                System.Console.WriteLine(ex.Message);
-                return Ok();
+                System.Console.WriteLine($@"Invalid type {update.Message.Type}");
             }
+
+            if(update.InlineQuery != null)
+            {
+                //TODO: Implement query processing.
+                System.Console.WriteLine("Update type is InlineQuery");
+            }
+            return Ok();
         }
     }
 }
