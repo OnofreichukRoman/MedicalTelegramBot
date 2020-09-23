@@ -6,7 +6,7 @@ namespace MedicalTelegrammBot.Models.Commands
 {
     internal class StartCommand : Command
     {
-        internal override string Name => "/start";
+        internal override string Name => @"/start";
 
         internal override bool Contains(Message message)
         {
