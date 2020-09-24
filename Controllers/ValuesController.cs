@@ -49,7 +49,7 @@ namespace MedicalTelegrammBot.Controllers
             }
             else if (update.Message != null && update.Message.Text == null)
             {
-                System.Console.WriteLine($@"Invalid type {update.Message.Type}");
+                System.Console.WriteLine($@"Invalid type of message {update.Message.Type}");
             }
 
             if(update.InlineQuery != null)

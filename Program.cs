@@ -10,7 +10,7 @@ namespace MedicalTelegrammBot
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Medical Telegram Bot v1.0");
+            Console.WriteLine("Medical Telegram Bot v1.0\n");
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.Green;
 
