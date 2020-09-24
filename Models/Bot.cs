@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Telegram.Bot;
+using System;
 
 namespace MedicalTelegrammBot.Models
 {
@@ -24,9 +25,21 @@ namespace MedicalTelegrammBot.Models
             _comandsList.Add(new AnalyzesCommand());
             //TODO: Add more commands
 
-            _botClient = new TelegramBotClient(AppSettings.Token);
-            string hook = string.Format(AppSettings.Url, "api/message/update");
-            await _botClient.SetWebhookAsync(hook);
+            try
+            {
+                _botClient = new TelegramBotClient(AppSettings.Token);
+                string hook = string.Format(AppSettings.Url, "api/message/update");
+                await _botClient.SetWebhookAsync(hook);
+            }
+            catch(ArgumentException ae)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine(ae.Message);
+                Console.WriteLine(ae.StackTrace);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.BackgroundColor = ConsoleColor.Black;
+            }
             return _botClient;
         }
     }
