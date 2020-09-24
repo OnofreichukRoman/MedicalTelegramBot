@@ -47,6 +47,7 @@ namespace MedicalTelegrammBot
 
             //Bot Configurations
             Bot.GetBotClientAsync().Wait();
+            System.Console.WriteLine("");
         }
     }
 }

@@ -22,7 +22,10 @@ namespace MedicalTelegrammBot.Models
 
             _comandsList = new List<Command>();
             _comandsList.Add(new StartCommand());
+            _comandsList.Add(new BackToStartCommand());
             _comandsList.Add(new AnalyzesCommand());
+            _comandsList.Add(new BackToStartCommand());
+            _comandsList.Add(new CommonAnalysisOfBloodCommand());
             //TODO: Add more commands
 
             try
@@ -37,7 +40,7 @@ namespace MedicalTelegrammBot.Models
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.WriteLine(ae.Message);
                 Console.WriteLine(ae.StackTrace);
-                Console.WriteLine("Press Ctrl+C to shut down.\n");
+                Console.WriteLine("Press Ctrl+C to shut down.");
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.BackgroundColor = ConsoleColor.Black;
             }
