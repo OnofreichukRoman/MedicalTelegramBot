@@ -25,7 +25,8 @@ namespace MedicalTelegrammBot.Models
             _comandsList.Add(new BackToStartCommand());
             _comandsList.Add(new AnalyzesCommand());
             _comandsList.Add(new BackToStartCommand());
-            _comandsList.Add(new CommonAnalysisOfBloodCommand());
+            _comandsList.Add(new CommonBloodTestCommand());
+            _comandsList.Add(new BackToAnalyzesCommand());
             //TODO: Add more commands
 
             try

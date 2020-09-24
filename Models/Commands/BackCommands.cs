@@ -14,4 +14,15 @@ namespace MedicalTelegrammBot.Models.Commands
             await st.Execute(message, botClient);
         }
     }
+
+    internal class BackToAnalyzesCommand : Command
+    {
+        internal override string Name => "🔙 Назад к анализам";
+
+        internal override async Task Execute(Message message, TelegramBotClient botClient)
+        {
+            AnalyzesCommand ac = new AnalyzesCommand();
+            await ac.Execute(message, botClient);
+        }
+    }
 }
