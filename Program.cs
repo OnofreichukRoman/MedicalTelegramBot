@@ -8,16 +8,16 @@ namespace MedicalTelegrammBot
     {
         public static void Main(string[] args)
         {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Blue;
             Console.WriteLine("Medical Telegram Bot v1.0");
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.Green;
 
             CreateWebHostBuilder(args).Build().Run();
 
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Blue;
             Console.WriteLine("Designed by Roman Onofreichuk 2020");
             Console.ResetColor();
         }

@@ -37,6 +37,7 @@ namespace MedicalTelegrammBot.Models
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.WriteLine(ae.Message);
                 Console.WriteLine(ae.StackTrace);
+                Console.WriteLine("Press Ctrl+C to shut down.");
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.BackgroundColor = ConsoleColor.Black;
             }

@@ -21,23 +21,30 @@ namespace MedicalTelegrammBot.Controllers
         {
             if (update == null)
             {
-                System.Console.WriteLine("UpdateNullPointerExeption");
+                System.Console.WriteLine("Update is null");
                 return Ok();
             }
 
-            if (update.Message != null && update.Message.Text != null)
+            if (update.Message?.Text != null)
             {
                 var commands = Bot.Commands;
                 var message = update.Message;
                 var botClient = await Bot.GetBotClientAsync();
 
-                foreach (var command in commands)
+                if(botClient != null)
                 {
-                    if (message.Text.Contains(command.Name))
+                    foreach (var command in commands)
                     {
-                        await command.Execute(message, botClient);
-                        break;
+                        if (message.Text.Contains(command.Name))
+                        {
+                            await command.Execute(message, botClient);
+                            break;
+                        }
                     }
+                }
+                else
+                {
+                    System.Console.WriteLine("botClient is null");
                 }
             }
             else if (update.Message != null && update.Message.Text == null)
