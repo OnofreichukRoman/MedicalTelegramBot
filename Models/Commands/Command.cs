@@ -15,7 +15,7 @@ namespace MedicalTelegrammBot.Models.Commands
         internal abstract string Name { get; }
 
         /// <summary>
-        /// Execute the command.
+        /// Use this method to execute the command.
         /// </summary>
         /// <param name="message">Incoming message <see cref="Update.Message"/>.</param>
         /// <param name="client">The bot client <see cref="TelegramBotClient"/>.</param>
