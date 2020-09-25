@@ -23,7 +23,7 @@ namespace MedicalTelegrammBot.Models.Commands
 
             var startKeyboard = new Telegram.Bot.Types.ReplyMarkups.ReplyKeyboardMarkup(keyboardButtons){ ResizeKeyboard = true};
             var chatId = message.Chat.Id;
-            var userName = message.From.Username;
+            var userName = message.From.FirstName;
 
             string botTextAnswer = $" 🏥 Добро пожаловать, *{userName}*! \nЯ помогу Вам найти информацию о самых популярных лабораторных анализах, подскажу, что делать в экстренных случаях и многое другое!";
             string botStartKeyboardMessage = "Что вас интересует?";
