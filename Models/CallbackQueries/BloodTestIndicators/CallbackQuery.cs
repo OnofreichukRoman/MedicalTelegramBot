@@ -2,7 +2,7 @@
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace MedicalTelegrammBot.Models.CallbackQueries
+namespace MedicalTelegrammBot.Models.CallbackQueries.BloodTestIndicators
 {
     /// <summary>
     /// Defines an abstract callback query.

@@ -1,4 +1,5 @@
 ﻿using MedicalTelegrammBot.Models.Commands;
+using MedicalTelegrammBot.Models.CallbackQueries.BloodTestIndicators;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Telegram.Bot;
@@ -10,8 +11,10 @@ namespace MedicalTelegrammBot.Models
     {
         private static TelegramBotClient _botClient;
         private static List<Command> _comandsList;
+        private static List<CallbackQuery> _callbackQueriesList;
 
         internal static IReadOnlyList<Command> Commands => _comandsList.AsReadOnly();
+        internal static IReadOnlyList<CallbackQuery> CallbackQueries => _callbackQueriesList.AsReadOnly();
 
         internal static async Task<TelegramBotClient> GetBotClientAsync()
         {
@@ -27,7 +30,16 @@ namespace MedicalTelegrammBot.Models
                     BackToStart = new BackToStartCommand(new StartCommand()),
                     CommonBloodTest = new CommonBloodTestCommand()
                     {
-                        BloodTestIndicators = new BloodTestIndicatorsCommand(),
+                        BloodTestIndicators = new BloodTestIndicatorsCommand()
+                        {
+                            Leukocytes = new LeukocytesCallbackQuery(),
+                            Neutrophils = new NeutrophilsCallbackQuery(),
+                            Lymphocytes = new LymphocytesCallbackQuery(),
+                            Monocytes = new MonocytesCallbackQuery(),
+                            Eosinophils = new EosinophilsCallbackQuery(),
+                            Basophils = new BasophilsCallbackQuery(),
+                            BackToIndicators = new BackToIndicatorsCallbackQuery()
+                        },
                         BackToAnalyzes = new BackToAnalyzesCommand(new AnalyzesCommand())
                     },
                     CommonUrineTest = new CommonUrineTestCommand()
@@ -46,6 +58,20 @@ namespace MedicalTelegrammBot.Models
                 Start.Analyzes.CommonUrineTest,
                 Start.FirstAid
                 //TODO: Add more commands
+            };
+
+            var BloodTestIndicators = Start.Analyzes.CommonBloodTest.BloodTestIndicators;
+
+            _callbackQueriesList = new List<CallbackQuery>()
+            {
+                BloodTestIndicators.Leukocytes,
+                BloodTestIndicators.Neutrophils,
+                BloodTestIndicators.Lymphocytes,
+                BloodTestIndicators.Monocytes,
+                BloodTestIndicators.Eosinophils,
+                BloodTestIndicators.Basophils,
+                BloodTestIndicators.BackToIndicators
+                //TODO: Add more callback queries
             };
 
             try

@@ -7,7 +7,7 @@ namespace MedicalTelegrammBot.Models.Commands
     internal class BackToStartCommand : Command
     {
         internal override string Name => "🔙 На главную";
-        internal StartCommand Start;
+        internal StartCommand Start { get; set; }
 
         internal BackToStartCommand(StartCommand start)
         {

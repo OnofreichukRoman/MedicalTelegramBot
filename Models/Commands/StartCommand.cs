@@ -7,8 +7,8 @@ namespace MedicalTelegrammBot.Models.Commands
     internal class StartCommand : Command
     {
         internal override string Name => @"/start";
-        internal AnalyzesCommand Analyzes;
-        internal FirstAidCommand FirstAid;
+        internal AnalyzesCommand Analyzes { get; set; }
+        internal FirstAidCommand FirstAid { get; set; }
 
         internal override async Task Execute(Message message, TelegramBotClient botClient)
         {

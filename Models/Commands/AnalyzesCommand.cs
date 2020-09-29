@@ -7,9 +7,9 @@ namespace MedicalTelegrammBot.Models.Commands
     internal class AnalyzesCommand : Command
     {
         internal override string Name => "Анализы";
-        internal BackToStartCommand BackToStart;
-        internal CommonBloodTestCommand CommonBloodTest;
-        internal CommonUrineTestCommand CommonUrineTest;
+        internal BackToStartCommand BackToStart { get; set; }
+        internal CommonBloodTestCommand CommonBloodTest { get; set; }
+        internal CommonUrineTestCommand CommonUrineTest { get; set; }
 
         internal override async Task Execute(Message message, TelegramBotClient botClient)
         {

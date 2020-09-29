@@ -2,21 +2,14 @@
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using MedicalTelegrammBot.Models.CallbackQueries.BloodTestIndicators;
 
 namespace MedicalTelegrammBot.Models.Commands
 {
     internal class BloodTestIndicatorsCommand : Command
     {
         internal override string Name => "🧾 Показатели анализа крови";
-        internal List<string> IndicatorsList { get; }
-        internal string CallbackData { get; }
-
-        private readonly int _inlineKeyboardRowsCount;
-        private readonly int _inlineKeyboardColumnsCount;
-
-        internal BloodTestIndicatorsCommand()
-        {
-            IndicatorsList = new List<string>()
+        internal static List<string> IndicatorsList { get; } = new List<string>()
             {
                 "Лейкоциты",
                 "Нейтрофилы",
@@ -25,16 +18,23 @@ namespace MedicalTelegrammBot.Models.Commands
                 "Эозинофилы",
                 "Базофилы"
             };
-            CallbackData = " в крови";
-            _inlineKeyboardColumnsCount = 2;
-            _inlineKeyboardRowsCount = (int)System.Math.Round(IndicatorsList.Count / (double)_inlineKeyboardColumnsCount);
-        }
+        internal static string CallbackData { get; } = " в крови";
+        internal static int InlineKeyboardRowsCount { get; } = 2;
+        internal static int InlineKeyboardColumnsCount { get; } = (int)System.Math.Round(IndicatorsList.Count / (double)InlineKeyboardColumnsCount);
+
+        internal LeukocytesCallbackQuery Leukocytes { get; set; }
+        internal NeutrophilsCallbackQuery Neutrophils { get; set; }
+        internal LymphocytesCallbackQuery Lymphocytes { get; set; }
+        internal MonocytesCallbackQuery Monocytes { get; set; }
+        internal EosinophilsCallbackQuery Eosinophils { get; set; }
+        internal BasophilsCallbackQuery Basophils { get; set; }
+        internal BackToIndicatorsCallbackQuery BackToIndicators { get; set; }
 
         internal override async Task Execute(Message message, TelegramBotClient botClient)
         {
-            var inlineKeyboarButtons = new Telegram.Bot.Types.ReplyMarkups.InlineKeyboardButton[_inlineKeyboardRowsCount][];
+            var inlineKeyboarButtons = new Telegram.Bot.Types.ReplyMarkups.InlineKeyboardButton[InlineKeyboardRowsCount][];
 
-            for (int i = 0, j = 0, k = 1; i <= _inlineKeyboardRowsCount; j += _inlineKeyboardColumnsCount, k += _inlineKeyboardColumnsCount)
+            for (int i = 0, j = 0, k = 1; i <= InlineKeyboardRowsCount; j += InlineKeyboardColumnsCount, k += InlineKeyboardColumnsCount)
             {
                 // row i
                 inlineKeyboarButtons[i] =

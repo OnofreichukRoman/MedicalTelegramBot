@@ -7,7 +7,7 @@ namespace MedicalTelegrammBot.Models.Commands
     internal class BackToAnalyzesCommand : Command
     {
         internal override string Name => "🔙 Назад к анализам";
-        internal AnalyzesCommand Analyzes;
+        internal AnalyzesCommand Analyzes { get; set; }
 
         internal BackToAnalyzesCommand(AnalyzesCommand analyzes)
         {
