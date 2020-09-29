@@ -20,23 +20,43 @@ namespace MedicalTelegrammBot.Models
                 return _botClient;
             }
 
-            _comandsList = new List<Command>();
-            _comandsList.Add(new StartCommand());
-            _comandsList.Add(new BackToStartCommand());
-            _comandsList.Add(new AnalyzesCommand());
-            _comandsList.Add(new BackToStartCommand());
-            _comandsList.Add(new CommonBloodTestCommand());
-            _comandsList.Add(new BackToAnalyzesCommand());
-            _comandsList.Add(new BloodTestIndicatorsCommand());
-            _comandsList.Add(new FirstAidCommand());
-            _comandsList.Add(new CommonUrineTestCommand());
-            //TODO: Add more commands
+            //Navigation
+            var Start = new StartCommand() {
+                Analyzes = new AnalyzesCommand()
+                {
+                    BackToStart = new BackToStartCommand(new StartCommand()),
+                    CommonBloodTest = new CommonBloodTestCommand()
+                    {
+                        BloodTestIndicators = new BloodTestIndicatorsCommand(),
+                        BackToAnalyzes = new BackToAnalyzesCommand(new AnalyzesCommand())
+                    },
+                    CommonUrineTest = new CommonUrineTestCommand()
+                },
+                FirstAid = new FirstAidCommand()
+            };
+
+            _comandsList = new List<Command>()
+            {
+                Start,
+                Start.Analyzes,
+                Start.Analyzes.BackToStart,
+                Start.Analyzes.CommonBloodTest,
+                Start.Analyzes.CommonBloodTest.BloodTestIndicators,
+                Start.Analyzes.CommonBloodTest.BackToAnalyzes,
+                Start.Analyzes.CommonUrineTest,
+                Start.FirstAid
+                //TODO: Add more commands
+            };
 
             try
             {
                 _botClient = new TelegramBotClient(AppSettings.Token);
-                string hook = string.Format(AppSettings.Url, "api/message/update");
-                await _botClient.SetWebhookAsync(hook);
+                string hook = string.Format(AppSettings.Url, "bot/update");
+
+                if (_botClient.GetWebhookInfoAsync().Result.Url != hook)
+                {
+                    await _botClient.SetWebhookAsync(hook);
+                }
             }
             catch(ArgumentException ae)
             {

@@ -5,22 +5,20 @@ using Telegram.Bot.Types;
 namespace MedicalTelegrammBot.Models.Commands
 {
     /// <summary>
-    /// Defines the abstract bot command <see cref="Command" />.
+    /// Defines an abstract bot command.
     /// </summary>
     internal abstract class Command
     {
         /// <summary>
-        /// Gets the command name.
+        /// Gets the name of the command.
         /// </summary>
         internal abstract string Name { get; }
 
         /// <summary>
         /// Use this method to execute the command.
         /// </summary>
-        /// <param name="message">Incoming message <see cref="Update.Message"/>.</param>
-        /// <param name="client">The bot client <see cref="TelegramBotClient"/>.</param>
-        /// <returns>Command execution <see cref="Task"/>.</returns>
-        ///
-        internal abstract Task Execute(Message message, TelegramBotClient client);
+        /// <param name="message">Incoming message <see cref="Telegram.Bot.Types.Update.Message"/>.</param>
+        /// <param name="botClient">An instance of the client <see cref="Bot.GetBotClientAsync()"/>.</param>
+        internal abstract Task Execute(Message message, TelegramBotClient botClient);
     }
 }

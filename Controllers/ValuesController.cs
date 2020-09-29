@@ -5,17 +5,17 @@ using Telegram.Bot.Types;
 
 namespace MedicalTelegrammBot.Controllers
 {
-    [Route("api/message/update")]
-    public class MessageController : Controller
+    [Route("bot/[controller]")]
+    public class UpdateController : Controller
     {
-        // GET api/values
+        // GET bot/update
         [HttpGet]
         public string Get()
         {
             return "Method GET unavailable";
         }
 
-        // POST api/values
+        // POST bot/update
         [HttpPost]
         public async Task<OkResult> Post([FromBody] Update update)
         {
@@ -23,6 +23,11 @@ namespace MedicalTelegrammBot.Controllers
             {
                 System.Console.WriteLine("Update is null");
                 return Ok();
+            }
+
+            if (update.CallbackQuery?.Data != null)
+            {
+                var botClient = await Bot.GetBotClientAsync();
             }
 
             if (update.Message?.Text != null)

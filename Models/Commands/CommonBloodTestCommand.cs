@@ -1,55 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
 namespace MedicalTelegrammBot.Models.Commands
 {
-    internal class AnalyzesCommand : Command
-    {
-        internal override string Name => "Анализы";
-
-        internal override async Task Execute(Message message, TelegramBotClient botClient)
-        {
-            var keyboardCommonAnalyzesButtons = new[]
-            {
-                new [] // row 1
-                {
-                    //column 1
-                    new Telegram.Bot.Types.ReplyMarkups.KeyboardButton("🔙 На главную"),
-                    //column 2
-                    new Telegram.Bot.Types.ReplyMarkups.KeyboardButton("🔬 Общий анализ мочи")
-                },
-                new [] // row 2
-                {
-                    //column 1
-                    new Telegram.Bot.Types.ReplyMarkups.KeyboardButton("🔬 Общий анализ крови")
-                }
-            };
-            var inlineKeyboardSearchButton = new Telegram.Bot.Types.ReplyMarkups.InlineKeyboardButton[][]
-            {
-                // row 1
-                new []
-                {
-                    // column 1
-                    Telegram.Bot.Types.ReplyMarkups.InlineKeyboardButton.WithSwitchInlineQueryCurrentChat("🔍 Поиск")
-                }
-            };
-
-            var keyboardCommonAnalyzes = new Telegram.Bot.Types.ReplyMarkups.ReplyKeyboardMarkup(keyboardCommonAnalyzesButtons){ ResizeKeyboard = true};
-            var inlineKeyboardSearch = new Telegram.Bot.Types.ReplyMarkups.InlineKeyboardMarkup(inlineKeyboardSearchButton);
-            var chatId = message.Chat.Id;
-
-            string botCommonAnalyzesMessage = "Выберете интересующий Вас анализ: ↕️";
-            string botSearchAnalyzesMessage = "Или воспользуйтесь кнопкой поиска по другим анализам и показателям";
-
-            await botClient.SendTextMessageAsync(chatId, botCommonAnalyzesMessage, replyToMessageId: message.MessageId, replyMarkup: keyboardCommonAnalyzes);
-            await botClient.SendTextMessageAsync(chatId, botSearchAnalyzesMessage, replyMarkup: inlineKeyboardSearch);
-        }
-    }
-
     internal class CommonBloodTestCommand : Command
     {
         internal override string Name => "🔬 Общий анализ крови";
+        internal BloodTestIndicatorsCommand BloodTestIndicators;
+        internal BackToAnalyzesCommand BackToAnalyzes;
 
         internal override async Task Execute(Message message, TelegramBotClient botClient)
         {
@@ -85,36 +45,6 @@ namespace MedicalTelegrammBot.Models.Commands
 
             await botClient.SendPhotoAsync(chatId, "https://raw.githubusercontent.com/OnofreichukRoman/MedicalTelegrammBot/master/Images/bloodanalysis.jpg", botCommonAnalysisOfBloodMessage,replyToMessageId: message.MessageId, parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown, replyMarkup: keyboardCommonBloodTestAnalyzes);
             await botClient.SendTextMessageAsync(chatId, botSearchAnalyzesMessage, replyMarkup: inlineKeyboardSearch);
-        }
-    }
-
-    internal class CommonUrineTestCommand : Command
-    {
-        internal override string Name => "🔬 Общий анализ мочи";
-
-        internal override async Task Execute(Message message, TelegramBotClient botClient)
-        {
-
-            var chatId = message.Chat.Id;
-
-            string botCommonUrineTestMessage = "Этот раздел в процессе создания";
-
-            await botClient.SendTextMessageAsync(chatId, botCommonUrineTestMessage, replyToMessageId: message.MessageId, parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
-        }
-    }
-
-    internal class BloodTestIndicatorsCommand : Command
-    {
-        internal override string Name => "🧾 Показатели анализа крови";
-
-        internal override async Task Execute(Message message, TelegramBotClient botClient)
-        {
-
-            var chatId = message.Chat.Id;
-
-            string botBloodTestIndicatorsMessage = "Этот раздел в процессе создания";
-
-            await botClient.SendTextMessageAsync(chatId, botBloodTestIndicatorsMessage, replyToMessageId: message.MessageId, parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
         }
     }
 }

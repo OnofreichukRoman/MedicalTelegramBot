@@ -16,9 +16,6 @@ namespace MedicalTelegrammBot
 
             CreateWebHostBuilder(args).Build().Run();
 
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Designed by Roman Onofreichuk 2020");
             Console.ResetColor();
         }
 
