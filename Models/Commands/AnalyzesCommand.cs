@@ -13,7 +13,7 @@ namespace MedicalTelegrammBot.Models.Commands
 
         internal override async Task Execute(Message message, TelegramBotClient botClient)
         {
-            var keyboardCommonAnalyzesButtons = new[]
+            var keyboardButtons = new[]
             {
                 new [] // row 1
                 {
@@ -38,15 +38,15 @@ namespace MedicalTelegrammBot.Models.Commands
                 }
             };
 
-            var keyboardCommonAnalyzes = new Telegram.Bot.Types.ReplyMarkups.ReplyKeyboardMarkup(keyboardCommonAnalyzesButtons){ ResizeKeyboard = true};
+            var keyboard = new Telegram.Bot.Types.ReplyMarkups.ReplyKeyboardMarkup(keyboardButtons){ ResizeKeyboard = true};
             var inlineKeyboardSearch = new Telegram.Bot.Types.ReplyMarkups.InlineKeyboardMarkup(inlineKeyboardSearchButton);
             var chatId = message.Chat.Id;
 
-            string botCommonAnalyzesMessage = "Выберете интересующий Вас анализ: ↕️";
-            string botSearchAnalyzesMessage = "Или воспользуйтесь кнопкой поиска по другим анализам и показателям";
+            string botMessage = "Выберете интересующий Вас анализ: ↕️";
+            string botSearchMessage = "Или воспользуйтесь кнопкой поиска по другим анализам и показателям";
 
-            await botClient.SendTextMessageAsync(chatId, botCommonAnalyzesMessage, replyToMessageId: message.MessageId, replyMarkup: keyboardCommonAnalyzes);
-            await botClient.SendTextMessageAsync(chatId, botSearchAnalyzesMessage, replyMarkup: inlineKeyboardSearch);
+            await botClient.SendTextMessageAsync(chatId, botMessage, replyToMessageId: message.MessageId, replyMarkup: keyboard);
+            await botClient.SendTextMessageAsync(chatId, botSearchMessage, replyMarkup: inlineKeyboardSearch);
         }
     }
 }

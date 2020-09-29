@@ -13,9 +13,9 @@ namespace MedicalTelegrammBot.Models.Commands
 
             var chatId = message.Chat.Id;
 
-            string botFirstAidMessage = "Этот раздел в процессе создания";
+            string botMessage = "Этот раздел в процессе создания";
 
-            await botClient.SendTextMessageAsync(chatId, botFirstAidMessage, replyToMessageId: message.MessageId, parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
+            await botClient.SendTextMessageAsync(chatId, botMessage, replyToMessageId: message.MessageId, parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
         }
     }
 }

@@ -11,8 +11,8 @@ namespace MedicalTelegrammBot.Models.Commands
         internal List<string> IndicatorsList { get; }
         internal string CallbackData { get; }
 
-        private readonly int _inlineKeyboardButtonRowsCount;
-        private readonly int _inlineKeyboardButtonColumnsCount;
+        private readonly int _inlineKeyboardRowsCount;
+        private readonly int _inlineKeyboardColumnsCount;
 
         internal BloodTestIndicatorsCommand()
         {
@@ -26,18 +26,18 @@ namespace MedicalTelegrammBot.Models.Commands
                 "Базофилы"
             };
             CallbackData = " в крови";
-            _inlineKeyboardButtonColumnsCount = 2;
-            _inlineKeyboardButtonRowsCount = (int)System.Math.Round(IndicatorsList.Count / (double)_inlineKeyboardButtonColumnsCount);
+            _inlineKeyboardColumnsCount = 2;
+            _inlineKeyboardRowsCount = (int)System.Math.Round(IndicatorsList.Count / (double)_inlineKeyboardColumnsCount);
         }
 
         internal override async Task Execute(Message message, TelegramBotClient botClient)
         {
-            var inlineKeyboarBloodTestIndicatorsButtons = new Telegram.Bot.Types.ReplyMarkups.InlineKeyboardButton[_inlineKeyboardButtonRowsCount][];
+            var inlineKeyboarButtons = new Telegram.Bot.Types.ReplyMarkups.InlineKeyboardButton[_inlineKeyboardRowsCount][];
 
-            for (int i = 0, j = 0, k = 1; i <= _inlineKeyboardButtonRowsCount; j += _inlineKeyboardButtonColumnsCount, k += _inlineKeyboardButtonColumnsCount)
+            for (int i = 0, j = 0, k = 1; i <= _inlineKeyboardRowsCount; j += _inlineKeyboardColumnsCount, k += _inlineKeyboardColumnsCount)
             {
                 // row i
-                inlineKeyboarBloodTestIndicatorsButtons[i] =
+                inlineKeyboarButtons[i] =
                 new[]
                 {
                     // column 1
@@ -47,12 +47,12 @@ namespace MedicalTelegrammBot.Models.Commands
                 };
             }
 
-            var inlineKeyboarBloodTestIndicators = new Telegram.Bot.Types.ReplyMarkups.InlineKeyboardMarkup(inlineKeyboarBloodTestIndicatorsButtons);
+            var inlineKeyboar = new Telegram.Bot.Types.ReplyMarkups.InlineKeyboardMarkup(inlineKeyboarButtons);
             var chatId = message.Chat.Id;
 
-            string botBloodTestIndicatorsMessage = "Выберете интересующий Вас показатель:";
+            string botMessage = "Выберете интересующий Вас показатель:";
 
-            await botClient.SendPhotoAsync(chatId,"https://i.pinimg.com/236x/12/d8/8e/12d88e2cf8ab9dc4a744fdd9782ef9b0.jpg", botBloodTestIndicatorsMessage, replyToMessageId: message.MessageId, parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown, replyMarkup: inlineKeyboarBloodTestIndicators);
+            await botClient.SendPhotoAsync(chatId,"https://i.pinimg.com/236x/12/d8/8e/12d88e2cf8ab9dc4a744fdd9782ef9b0.jpg", botMessage, replyToMessageId: message.MessageId, parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown, replyMarkup: inlineKeyboar);
         }
     }
 }
