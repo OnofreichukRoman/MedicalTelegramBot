@@ -27,7 +27,25 @@ namespace MedicalTelegrammBot.Controllers
 
             if (update.CallbackQuery?.Data != null)
             {
+                var callbackQueries = Bot.CallbackQueries;
+                var message = update.CallbackQuery.Message;
                 var botClient = await Bot.GetBotClientAsync();
+
+                if (botClient != null)
+                {
+                    foreach (var callbackQuery in callbackQueries)
+                    {
+                        if (message.Text.Contains(callbackQuery.Data))
+                        {
+                            await callbackQuery.Reply(message, botClient);
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    System.Console.WriteLine("botClient is null");
+                }
             }
 
             if (update.Message?.Text != null)
