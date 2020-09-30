@@ -52,7 +52,7 @@ namespace MedicalTelegrammBot.Models.Commands
 
             string botMessage = "Выберете интересующий Вас показатель:";
 
-            await botClient.SendPhotoAsync(chatId,"", botMessage, replyToMessageId: message.MessageId, parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown, replyMarkup: inlineKeyboar);
+            await botClient.SendPhotoAsync(chatId,"https://raw.githubusercontent.com/OnofreichukRoman/MedicalTelegramBot/master/Images/bloodtestindicators.jpg", botMessage, parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown, replyMarkup: inlineKeyboar);
         }
     }
 }
