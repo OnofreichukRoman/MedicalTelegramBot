@@ -19,8 +19,8 @@ namespace MedicalTelegrammBot.Models.Commands
                 "Базофилы"
             };
         internal static string CallbackData { get; } = " в крови";
-        internal static int InlineKeyboardRowsCount { get; } = 2;
-        internal static int InlineKeyboardColumnsCount { get; } = (int)System.Math.Round(IndicatorsList.Count / (double)InlineKeyboardColumnsCount);
+        internal static int InlineKeyboardColumnsCount { get; } = 2;
+        internal static int InlineKeyboardRowsCount { get; } = (int)System.Math.Round(IndicatorsList.Count / (double)InlineKeyboardColumnsCount);
 
         internal LeukocytesCallbackQuery Leukocytes { get; set; }
         internal NeutrophilsCallbackQuery Neutrophils { get; set; }
@@ -34,7 +34,7 @@ namespace MedicalTelegrammBot.Models.Commands
         {
             var inlineKeyboarButtons = new Telegram.Bot.Types.ReplyMarkups.InlineKeyboardButton[InlineKeyboardRowsCount][];
 
-            for (int i = 0, j = 0, k = 1; i <= InlineKeyboardRowsCount; j += InlineKeyboardColumnsCount, k += InlineKeyboardColumnsCount)
+            for (int i = 0, j = 0, k = 1; i < InlineKeyboardRowsCount; i++, j += InlineKeyboardColumnsCount, k += InlineKeyboardColumnsCount)
             {
                 // row i
                 inlineKeyboarButtons[i] =
@@ -52,7 +52,7 @@ namespace MedicalTelegrammBot.Models.Commands
 
             string botMessage = "Выберете интересующий Вас показатель:";
 
-            await botClient.SendPhotoAsync(chatId,"https://i.pinimg.com/236x/12/d8/8e/12d88e2cf8ab9dc4a744fdd9782ef9b0.jpg", botMessage, replyToMessageId: message.MessageId, parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown, replyMarkup: inlineKeyboar);
+            await botClient.SendPhotoAsync(chatId,"", botMessage, replyToMessageId: message.MessageId, parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown, replyMarkup: inlineKeyboar);
         }
     }
 }

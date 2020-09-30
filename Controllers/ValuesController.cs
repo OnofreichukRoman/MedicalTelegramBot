@@ -35,7 +35,7 @@ namespace MedicalTelegrammBot.Controllers
                 {
                     foreach (var callbackQuery in callbackQueries)
                     {
-                        if (message.Text.Contains(callbackQuery.Data))
+                        if (update.CallbackQuery.Data == callbackQuery.Data)
                         {
                             await callbackQuery.Reply(message, botClient);
                             break;
