@@ -30,7 +30,7 @@ namespace MedicalTelegrammBot.Models.CallbackQueries.BloodTestIndicators
             var chatId = message.Chat.Id;
 
             string newBotMessage = "Выберете интересующий Вас показатель:";
-            InputMediaPhoto im = new InputMediaPhoto("https://i.pinimg.com/236x/12/d8/8e/12d88e2cf8ab9dc4a744fdd9782ef9b0.jpg");
+            InputMediaPhoto im = new InputMediaPhoto("https://raw.githubusercontent.com/OnofreichukRoman/MedicalTelegramBot/master/Images/bloodtestindicators.jpg");
 
             await botClient.EditMessageMediaAsync(chatId, message.MessageId, im, replyMarkup: inlineKeyboar);
             await botClient.EditMessageCaptionAsync(chatId, message.MessageId, newBotMessage, replyMarkup: inlineKeyboar, parseMode: Telegram.Bot.Types.Enums.ParseMode.Markdown);
