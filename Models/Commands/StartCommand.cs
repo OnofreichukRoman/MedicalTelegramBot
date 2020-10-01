@@ -7,6 +7,7 @@ namespace MedicalTelegrammBot.Models.Commands
     internal class StartCommand : Command
     {
         internal override string Name => @"/start";
+
         internal AnalyzesCommand Analyzes { get; set; }
         internal FirstAidCommand FirstAid { get; set; }
 

@@ -16,8 +16,7 @@ namespace MedicalTelegrammBot.Models.Commands
 
         internal override async Task Execute(Message message, TelegramBotClient botClient)
         {
-            AnalyzesCommand ac = new AnalyzesCommand();
-            await ac.Execute(message, botClient);
+            await Analyzes.Execute(message, botClient);
         }
     }
 }

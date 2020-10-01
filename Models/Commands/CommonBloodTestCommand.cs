@@ -8,6 +8,7 @@ namespace MedicalTelegrammBot.Models.Commands
     internal class CommonBloodTestCommand : Command
     {
         internal override string Name => "🔬 Общий анализ крови";
+
         internal BloodTestIndicatorsCommand BloodTestIndicators { get; set; }
         internal BackToAnalyzesCommand BackToAnalyzes { get; set; }
 

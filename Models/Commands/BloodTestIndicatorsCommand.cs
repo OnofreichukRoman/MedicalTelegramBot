@@ -9,15 +9,16 @@ namespace MedicalTelegrammBot.Models.Commands
     internal class BloodTestIndicatorsCommand : Command
     {
         internal override string Name => "🧾 Показатели анализа крови";
+
         internal static List<string> IndicatorsList { get; } = new List<string>()
-            {
-                "Лейкоциты",
-                "Нейтрофилы",
-                "Лимфоциты",
-                "Моноциты",
-                "Эозинофилы",
-                "Базофилы"
-            };
+        {
+            "Лейкоциты",
+            "Нейтрофилы",
+            "Лимфоциты",
+            "Моноциты",
+            "Эозинофилы",
+            "Базофилы"
+        };
         internal static string CallbackData { get; } = " в крови";
         internal static int InlineKeyboardColumnsCount { get; } = 2;
         internal static int InlineKeyboardRowsCount { get; } = (int)System.Math.Round(IndicatorsList.Count / (double)InlineKeyboardColumnsCount);
